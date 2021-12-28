@@ -1,22 +1,13 @@
 import { styled } from '@mui/system';
+import { alpha } from '@mui/material/styles';
+import styled2 from '@mui/material/styles/styled';
+import InputBase from '@mui/material/InputBase';
 import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
-
-const blue = {
-    50: '#F0F7FF',
-    100: '#C2E0FF',
-    200: '#80BFFF',
-    300: '#66B2FF',
-    400: '#3399FF',
-    500: '#007FFF',
-    600: '#0072E5',
-    700: '#0059B2',
-    800: '#004C99',
-    900: '#003A75',
-  };
   
+// Login TabBar
 export const Tab = styled(TabUnstyled)`
     font-family: IBM Plex Sans, sans-serif;
     color: white;
@@ -34,7 +25,6 @@ export const Tab = styled(TabUnstyled)`
     &.${buttonUnstyledClasses.focusVisible} {
       color: #fff;
       outline: none;
-      background-color: ${blue[200]};
     }
   
     &.${tabUnstyledClasses.selected} {
@@ -67,3 +57,45 @@ export const TabsList = styled(TabsListUnstyled)`
     justify-content: center;
     align-content: space-between;
   `;
+
+
+  // AppBar
+  export const Search = styled2('div')(({ theme }) => ({
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing(3),
+        width: 'auto',
+    },
+}));
+
+export const SearchIconWrapper = styled2('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+}));
+
+export const StyledInputBase = styled2(InputBase)(({ theme }) => ({
+    color: 'inherit',
+    '& .MuiInputBase-input': {
+        padding: theme.spacing(1, 1, 1, 0),
+        // vertical padding + font size from searchIcon
+        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+        transition: theme.transitions.create('width'),
+        width: '100%',
+        [theme.breakpoints.up('md')]: {
+            width: '20ch',
+        },
+    },
+}));

@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Login from "./components/Login/Login";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Navbar from "./components/shared/Navbar/Navbar";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-              <Login />
+              <Navbar />
             </Route>
             <PrivateRoute path="/home">
               <h1>Home</h1>

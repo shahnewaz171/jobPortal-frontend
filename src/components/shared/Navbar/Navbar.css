@@ -1,0 +1,13 @@
+.main-logo{
+    height: 45px;
+    width: 45px;
+    object-fit: contain;
+}
+
+
+@media only screen and  (min-width: 600px){
+    .css-1t29gy6-MuiToolbar-root {
+        padding-left: 40px !important;
+        padding-right: 40px !important;
+    }
+}
