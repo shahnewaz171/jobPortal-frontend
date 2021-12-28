@@ -4,9 +4,5 @@
     margin: 1.3rem 0px !important;
 }
 .createJob-btn button{
-    text-transform: uppercase;
-}
-.createJob-btn button,
-.createJob-btn button:hover{
-    background-color: #5BBC2E !important;
+    padding: 5px 36px !important;
 }

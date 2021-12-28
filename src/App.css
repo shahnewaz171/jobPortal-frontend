@@ -2,6 +2,17 @@
   color: #fff !important;
 }
 
+.createJob-btn button,
+.filter-btn{
+    text-transform: uppercase;
+}
+.createJob-btn button,
+.createJob-btn button:hover,
+.filter-btn,
+.filter-btn:hover{
+    background-color: #5BBC2E !important;
+}
+
 @media only screen and  (min-width: 600px){
   .css-1t29gy6-MuiToolbar-root,
   .job-cards {
