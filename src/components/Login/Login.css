@@ -1,0 +1,13 @@
+.logo{
+    width: 200px;
+    height: 100px;
+    object-fit: contain;
+}
+.login-btn:hover{
+    background-color: #19305a !important;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
