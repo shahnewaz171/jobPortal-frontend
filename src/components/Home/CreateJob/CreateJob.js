@@ -1,7 +1,6 @@
 import React from 'react';
-import Button from '@mui/material/Button';
 import { FaPlusCircle } from "react-icons/fa";
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 import './CreateJob.css';
 
 const CreateJob = () => {
