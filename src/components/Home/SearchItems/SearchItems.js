@@ -26,7 +26,7 @@ const SearchItems = () => {
     return (
         <>
             <Box sx={{ width: '100%' }}>
-                <Grid container rowSpacing={1} className="job-cards" columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ pt: 4, px: 3 }} >
+                <Grid container rowSpacing={1} className="job-cards" columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ pt: 4, pb: 5, px: 3 }} >
                     <Grid item xs={6} md={3} lg={2}>
                         <Typography variant="p" component="div" className="searchItem-title" >
                             search
@@ -81,7 +81,7 @@ const SearchItems = () => {
                         </Select>
                     </Grid>
                     <Grid item xs={6} md={3} lg={2}>
-                       <Typography variant="p" component="div" sx={{paddingTop: "26px", textAlign: "end", paddingRight: "10px"}} >
+                       <Typography variant="p" component="div" sx={{paddingTop: "26px", textAlign: "end"}} >
                             <Button variant="contained" className="filter-btn" >
                                 filter
                             </Button>

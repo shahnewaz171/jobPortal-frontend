@@ -1,10 +1,17 @@
 .job-cards .job-card,
 .job-cards .hiring-card{
     background-color: #123068;
-    margin: 0px 10px;
 }
 .job-cards .interview-card,
 .job-cards .applicant-card{
     background-color: #182F59;
-    margin: 0px 10px;
+}
+
+@media only screen and (max-width: 599px) {
+    .job-cards .job-card,
+    .job-cards .hiring-card,
+    .job-cards .interview-card,
+    .job-cards .applicant-card{
+        margin: 0px 10px;
+    }
 }

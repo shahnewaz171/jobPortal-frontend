@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Cards from "./components/Home/Cards/Cards";
 import CreateJob from "./components/Home/CreateJob/CreateJob";
+import Jobs from "./components/Home/Jobs/Jobs";
 import SearchItems from "./components/Home/SearchItems/SearchItems";
 import Login from "./components/Login/Login";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -19,6 +20,7 @@ function App() {
               <Cards />
               <CreateJob />
               <SearchItems />
+              <Jobs />
             </Route>
             <PrivateRoute path="/home">
               <h1>Home</h1>

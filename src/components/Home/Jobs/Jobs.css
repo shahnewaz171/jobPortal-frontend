@@ -1,0 +1,42 @@
+.jobPost-title{
+    text-transform: uppercase;
+    background: #123068;
+    text-align: center;
+    color: #fff;
+    padding: 20px 0px;
+    font-weight: 700;
+    font-size: 22px;
+}
+.status-btn{
+    padding: 3px 10px !important;
+    font-size: 14px !important;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 3px;
+}
+.status-btn,
+.status-btn:hover{
+    background-color: #123068 !important;
+}
+.job-items table thead th{
+    font-size: 16px;
+    font-weight: 700 !important;
+}
+.css-usvtid-MuiTableCell-root.MuiTableCell-head:nth-last-child(-n+2){
+    text-align: center;
+}
+.job-items table tbody td:nth-last-child(-n+2){
+    text-align: center;
+}
+.job-items table tbody td svg{
+    cursor: pointer;
+}
+.edit-icon{
+    color: #5BBC2E;
+}
+.delete-icon{
+    color: #DB0909;
+}
+.visible-icon{
+    color: #066CCF;
+}

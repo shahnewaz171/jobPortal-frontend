@@ -1,11 +1,12 @@
+import { InputBase, TableRow } from '@mui/material';
 import { styled } from '@mui/system';
 import { alpha } from '@mui/material/styles';
 import styled2 from '@mui/material/styles/styled';
-import InputBase from '@mui/material/InputBase';
 import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
   
 // Login TabBar
 export const Tab = styled(TabUnstyled)`
@@ -98,4 +99,30 @@ export const StyledInputBase = styled2(InputBase)(({ theme }) => ({
             width: '20ch',
         },
     },
+}));
+
+// Jobs Table
+export const StyledTableCell = styled2(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.white,
+      color: theme.palette.common.black,
+      borderBottom: "1px solid #707070",
+      textAlign: "start"
+  },
+  [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+  },
+}));
+
+export const StyledTableRow = styled2(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+      border: 0
+  },
+  '&:last-child td': {
+      textAlign: "start"
+  }
 }));
