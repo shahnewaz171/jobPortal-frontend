@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button, CssBaseline, TextField, Paper, Box, Grid, Typography, FormControl, MenuItem, InputLabel, Select } from '@mui/material';
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -19,12 +19,16 @@ const Login = () => {
         mode: "all",
         reValidateMode: 'onChange'
     });
+    const location = useLocation();
+    const navigate = useNavigate();
     const password = useRef();
     password.current = watch('password');
-    
+
     const handleChange = (event) => {
         setGender(event.target.value);
     };
+
+    let { from } = location.state || { from: { pathname: "/" }};
 
     const onSubmit = data => {
         console.log(data);
@@ -40,34 +44,60 @@ const Login = () => {
             formData.append('gender', gender);
             formData.append('phone_number', data.number);
 
-            // setTimeout(() => {
-            //     axios.post('https://tf-practical.herokuapp.com/api/register/', formData, {
-            //         headers: {
-            //             'Content-Type': 'multipart/form-data'
-            //         }
-            //     })
-            //         .then(res => {
-            //             if (res) {
-            //                 setDisable(true);
-            //                 console.log(res);
-            //                 toast.success("Success", {
-            //                     theme: "dark",
-            //                     position: toast.POSITION.TOP_LEFT,
-            //                     autoClose: 3000
-            //                 });
-            //                 reset();
-            //             }
-            //         })
-            //         .catch(error => {
-            //             console.error(error);
-            //         });
-            // }, 2000)
-            // setDisable(false);
+            setTimeout(() => {
+                axios.post('https://tf-practical.herokuapp.com/api/register/', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                    .then(res => {
+                        if (res) {
+                            setDisable(false);
+                            console.log(res);
+                            toast.success("Success", {
+                                theme: "dark",
+                                position: toast.POSITION.TOP_LEFT,
+                                autoClose: 3000
+                            });
+                            reset();
+                            setLogin(true);
+                        }
+                    })
+                    .catch(error => {
+                        setDisable(false);
+                        console.error(error);
+                    });
+            }, 2000);
         }
         else if(login) {
-            
+            setTimeout(() => {
+                axios.post('https://tf-practical.herokuapp.com/api/login/', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                    .then(res => {
+                        if (res) {
+                            setDisable(false);
+                            console.log(res);
+                            toast.success("Successfully Logged In", {
+                                theme: "dark",
+                                position: toast.POSITION.TOP_LEFT,
+                                autoClose: 3000
+                            });
+                            const { access, user } = res.data;
+                            window.localStorage.setItem('jwtToken', access);
+                            window.localStorage.setItem('userInfo', JSON.stringify(user));
+                            navigate(from, { replace: true });
+                        }
+                    })
+                    .catch(error => {
+                        setDisable(false);
+                        console.error(error);
+                    });
+            }, 2000);
         }
-        reset()
+        setDisable(true);
     }
 
 
@@ -119,7 +149,7 @@ const Login = () => {
                                         </>
                                     }
                                    {login && <Box className="text-center" >
-                                        <Button type="submit" variant="contained" className="login-btn" >{ disable ? "Signing In...": "Sign In" }</Button>
+                                        <Button disabled={disable} type="submit" variant="contained" className="login-btn" >{ disable ? "Signing In...": "Sign In" }</Button>
                                     </Box>}
                                    {!login && <Box className="text-center" >
                                         <Button disabled={disable} type="submit" variant="contained" className="login-btn" >{ disable ? "Registering...": "Sign up" }</Button>

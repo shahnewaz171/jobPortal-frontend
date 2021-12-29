@@ -14,14 +14,18 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<PrivateRoute />}>
-            <Route element={<Home />} />
-          </Route>
-          <Route path="home" element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Login />} />
-          <Route path="view-job" element={<ViewJob />} />
-          <Route path="edit-job" element={<EditJob />} />
+          <Route path="/"  element={
+            <PrivateRoute><Home /></PrivateRoute>
+          }/>
+          <Route path="login" element={
+            <Login />
+          } />
+          <Route path="view-job"  element={
+            <PrivateRoute><ViewJob /></PrivateRoute>
+          }/>
+           <Route path="edit-job"  element={
+            <PrivateRoute><EditJob /></PrivateRoute>
+          }/>
         </Routes>
       </BrowserRouter>
     </>
