@@ -13,7 +13,7 @@ const theme = createTheme();
 
 const Login = () => {
     const [login, setLogin] = useState(true);
-    const [gender, setGender] = useState('Male');
+    const [gender, setGender] = useState("Male");
     const [disable, setDisable] = useState(false);
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm({
         mode: "all",
@@ -21,7 +21,7 @@ const Login = () => {
     });
     const password = useRef();
     password.current = watch('password');
-
+    
     const handleChange = (event) => {
         setGender(event.target.value);
     };
@@ -29,15 +29,17 @@ const Login = () => {
     const onSubmit = data => {
         console.log(data);
         const formData = new FormData();
-
-        formData.append('full_name', data.name);
+        
         formData.append('email', data.email);
-        formData.append('birthDate', data.birth);
-        formData.append('gender', gender);
-        formData.append('phone_number', data.number);
         formData.append('password', data.password);
 
         if (!login && data.email && data.password) {
+
+            formData.append('full_name', data.name);
+            formData.append('birthDate', data.birth);
+            formData.append('gender', gender);
+            formData.append('phone_number', data.number);
+
             // setTimeout(() => {
             //     axios.post('https://tf-practical.herokuapp.com/api/register/', formData, {
             //         headers: {
@@ -63,9 +65,11 @@ const Login = () => {
             // setDisable(false);
         }
         else if(login) {
-
+            
         }
+        reset()
     }
+
 
     return (
         <>
@@ -75,8 +79,8 @@ const Login = () => {
                     <Grid item xs={12} sm={11} md={6} lg={5} component={Paper} elevation={6} square >
                         <Div className="login-tabs" >
                             <Div sx={{ display: "flex", flexWrap: "wrap" }}>
-                                <Typography onClick={() => { reset(); setLogin(true) }} component="p" variant="h5" className={"nav-item " + (login ? "active" : "")}>Sign in</Typography>
-                                <Typography onClick={() => { reset(); setLogin(false) }} component="p" variant="h5" className={"nav-item " + (!login ? "active" : "")}>Sign Up</Typography>
+                                <Typography onClick={() => { reset(); setLogin(true); setGender("") }} component="p" variant="h5" className={"nav-item " + (login ? "active" : "")}>Sign in</Typography>
+                                <Typography onClick={() => { reset(); setLogin(false); setGender("Male"); }} component="p" variant="h5" className={"nav-item " + (!login ? "active" : "")}>Sign Up</Typography>
                             </Div>
                             <Box sx={{ pt: 6, px: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Typography component="h1" variant="h5" className="fw-500 uppercase">
@@ -100,8 +104,7 @@ const Login = () => {
                                             <TextField margin="normal" label="Date Of Birth" type="date" name="birthDate" className="mr-20" InputLabelProps={inputDateLabelStyle} {...register("birth", { required: "This field is required" })} error={Boolean(errors.birth)} helperText={errors.birth?.message}
                                             />
                                             <FormControl sx={{ width: "50%", marginTop: "16px" }} >
-                                                <InputLabel htmlFor="gender">Gender</InputLabel>
-                                                <Select value={gender} label="Gender" name="gender" onChange={handleChange} >
+                                                <Select value={gender} label="Gender" name="gender" onChange={handleChange}>
                                                     <MenuItem value="Male">Male</MenuItem>
                                                     <MenuItem value="Female">Female</MenuItem>
                                                     <MenuItem value="Others">Others</MenuItem>
