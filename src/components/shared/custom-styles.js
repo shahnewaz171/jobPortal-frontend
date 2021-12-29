@@ -143,3 +143,10 @@ export const modalStyle = {
   boxShadow: 24,
   p: 4,
 };
+
+export const inputLabelStyle = {
+  style: {fontSize: "14px"}
+}
+export const inputDateLabelStyle ={
+  shrink: true, style: {fontSize: "14px"}
+}

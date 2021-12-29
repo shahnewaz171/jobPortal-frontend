@@ -5,8 +5,8 @@ import EditJob from "./components/EditJob/EditJob";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import ViewJob from "./components/ViewJob/ViewJob";
-import './App.css';
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import './App.css';
 
 const App = () => {
 

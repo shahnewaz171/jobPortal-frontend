@@ -11,3 +11,24 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
+.login-tabs{
+  background-color: #eff3f6;
+  min-height: 570px;
+}
+.login-tabs .login-btn{
+  margin-top: 24px;
+  margin-bottom: 16px;
+  background-color: #19305a;
+  font-weight: 400;
+}
+.login-tabs .signup-form{
+  padding: 16px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media only screen and (max-width: 599px) {
+  .login-tab{
+    padding: 15px 20px;
+  }
+}
