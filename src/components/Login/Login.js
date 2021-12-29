@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { useLocation } from "react-router-dom";
 import { Button, CssBaseline, TextField, Paper, Box, Grid, Typography, FormControl, MenuItem, InputLabel, Select } from '@mui/material';
-import TabsUnstyled from '@mui/base/TabsUnstyled';
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { Tab, TabsList, TabPanel, inputLabelStyle, inputDateLabelStyle, Div } from '../shared/custom-styles';
+import { inputLabelStyle, inputDateLabelStyle, Div } from '../shared/custom-styles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { toast, ToastContainer } from 'react-toastify';
 import logoImg from '../../images/logo.png';
@@ -16,7 +15,6 @@ const Login = () => {
     const [login, setLogin] = useState(true);
     const [gender, setGender] = useState('Male');
     const [disable, setDisable] = useState(false);
-    const [user, setUser] = useState(null);
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm({
         mode: "all",
         reValidateMode: 'onChange'
@@ -27,12 +25,6 @@ const Login = () => {
     const handleChange = (event) => {
         setGender(event.target.value);
     };
-
-    const handleBlur = (e) => {
-        const userInfo = { ...user };
-        userInfo[e.target.name] = e.target.value;
-        setUser({ ...userInfo })
-    }
 
     const onSubmit = data => {
         console.log(data);
@@ -45,7 +37,7 @@ const Login = () => {
         formData.append('phone_number', data.number);
         formData.append('password', data.password);
 
-        if (data.name && data.confirm_pass) {
+        if (!login && data.email && data.password) {
             // setTimeout(() => {
             //     axios.post('https://tf-practical.herokuapp.com/api/register/', formData, {
             //         headers: {
@@ -70,8 +62,8 @@ const Login = () => {
             // }, 2000)
             // setDisable(false);
         }
-        else {
-            console.log(user);
+        else if(login) {
+
         }
     }
 
@@ -124,10 +116,10 @@ const Login = () => {
                                         </>
                                     }
                                    {login && <Box className="text-center" >
-                                        <Button type="submit" variant="contained" className="login-btn" >Sign In</Button>
+                                        <Button type="submit" variant="contained" className="login-btn" >{ disable ? "Signing In...": "Sign In" }</Button>
                                     </Box>}
                                    {!login && <Box className="text-center" >
-                                        <Button disabled={disable} type="submit" variant="contained" className="login-btn" >{disable ? "Registering..." : "Sign Up"}</Button>
+                                        <Button disabled={disable} type="submit" variant="contained" className="login-btn" >{ disable ? "Registering...": "Sign up" }</Button>
                                     </Box>}
                                 </Box>
                             </Box>
