@@ -4,6 +4,7 @@ import TabsUnstyled from '@mui/base/TabsUnstyled';
 import { Tab, TabsList,TabPanel } from '../shared/custom-styles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImg from '../../images/logo.png';
+import Navbar from '../shared/Navbar/Navbar';
 import './Login.css';
 
 const theme = createTheme();
@@ -26,6 +27,7 @@ const Login = () => {
 
     return (
         <>
+            <Navbar />
             <ThemeProvider theme={theme} >
                 <Grid container component="main" justifyContent="center"  alignItems="center" style={{ minHeight: '100vh' }} >
                     <CssBaseline />

@@ -53,7 +53,7 @@ const CreateJob = ({ open, setOpen }) => {
                 className="createJob-modal"
             >
                 <Box sx={modalStyle}>
-                    <Div className="demo">
+                    <Div className="filterInput">
                         <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
                             Create Job
                         </Typography>
