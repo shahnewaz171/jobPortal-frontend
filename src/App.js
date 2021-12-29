@@ -9,6 +9,7 @@ import SearchItems from "./components/Home/SearchItems/SearchItems";
 import Login from "./components/Login/Login";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Navbar from "./components/shared/Navbar/Navbar";
+import ViewJob from "./components/ViewJob/ViewJob";
 
 function App() {
   return (
@@ -17,10 +18,11 @@ function App() {
         <Switch>
           <Route exact path="/">
               <Navbar />
-              <Cards />
+              {/* <Cards />
               <CreateJob />
               <SearchItems />
-              <Jobs />
+              <Jobs /> */}
+              <ViewJob />
             </Route>
             <PrivateRoute path="/home">
               <h1>Home</h1>

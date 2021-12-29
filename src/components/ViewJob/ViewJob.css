@@ -1,0 +1,45 @@
+.view-post{
+    padding: 1.5rem 2rem;
+}
+.view-post .css-bhp9pd-MuiPaper-root-MuiCard-root{
+    box-shadow: none !important;
+    /* height: 80vh; */
+    padding: 0px 10px;
+}
+.view-post .vJob-title,
+.view-post .filter-questions{
+    padding: 20px 0px;
+}
+.view-post .vJob-title{
+    border-bottom: 1px solid #707070;
+}
+.view-post .vJob-title span,
+.view-post .vJob-title p:first-child,
+.view-post .filter-questions p:first-child{
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.view-post .vJob-title span:last-child{
+    font-weight: 800;
+}
+.view-post .vJob-title p:last-child{
+    font-size: 14px;
+    padding-top: 10px;
+    font-weight: 500;
+}
+.view-post .filter-questions{
+    margin-top: 2.5rem;
+    border: 1px solid #707070;
+    padding: 10px 15px;
+}
+.view-post .filter-questions ul{
+    list-style: decimal;
+    padding-left: 17px;
+}
+.view-post .filter-questions ul li{
+    display: list-item;
+    padding: 2px 0px;
+}
+.view-post .filter-questions ul li span{
+    font-weight: 500;
+}
