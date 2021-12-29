@@ -1,106 +1,153 @@
-import React from 'react';
-import { Button,CssBaseline,TextField, Paper, Box, Grid, Typography } from '@mui/material';
+import React, { useRef, useState } from 'react';
+import { useLocation } from "react-router-dom";
+import { Button, CssBaseline, TextField, Paper, Box, Grid, Typography, FormControl, MenuItem, InputLabel, Select } from '@mui/material';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
-import { Tab, TabsList,TabPanel, inputLabelStyle, inputDateLabelStyle } from '../shared/custom-styles';
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { Tab, TabsList, TabPanel, inputLabelStyle, inputDateLabelStyle, Div } from '../shared/custom-styles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { toast, ToastContainer } from 'react-toastify';
 import logoImg from '../../images/logo.png';
 import './Login.css';
 
 const theme = createTheme();
 
 const Login = () => {
+    const [login, setLogin] = useState(true);
+    const [gender, setGender] = useState('Male');
+    const [disable, setDisable] = useState(false);
+    const [user, setUser] = useState(null);
+    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm({
+        mode: "all",
+        reValidateMode: 'onChange'
+    });
+    const password = useRef();
+    password.current = watch('password');
 
-    const date = new Date();
-    const currentDate = ( date.getMonth() + 1 ) + '/' + date.getDate() + '/' + date.getFullYear();
-    console.log(currentDate);
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            name: data.get('name'),
-            phone: data.get('number'),
-            birthDate: data.get('birthDate'),
-            gender: data.get('gender'),
-            email: data.get('email'),
-            password: data.get('password'),
-            confirm_pass: data.get('confirm_pass')
-        });
+    const handleChange = (event) => {
+        setGender(event.target.value);
     };
+
+    const handleBlur = (e) => {
+        const userInfo = { ...user };
+        userInfo[e.target.name] = e.target.value;
+        setUser({ ...userInfo })
+    }
+
+    const onSubmit = data => {
+        console.log(data);
+        const formData = new FormData();
+
+        formData.append('full_name', data.name);
+        formData.append('email', data.email);
+        formData.append('birthDate', data.birth);
+        formData.append('gender', gender);
+        formData.append('phone_number', data.number);
+        formData.append('password', data.password);
+
+        if (data.name && data.confirm_pass) {
+            // setTimeout(() => {
+            //     axios.post('https://tf-practical.herokuapp.com/api/register/', formData, {
+            //         headers: {
+            //             'Content-Type': 'multipart/form-data'
+            //         }
+            //     })
+            //         .then(res => {
+            //             if (res) {
+            //                 setDisable(true);
+            //                 console.log(res);
+            //                 toast.success("Success", {
+            //                     theme: "dark",
+            //                     position: toast.POSITION.TOP_LEFT,
+            //                     autoClose: 3000
+            //                 });
+            //                 reset();
+            //             }
+            //         })
+            //         .catch(error => {
+            //             console.error(error);
+            //         });
+            // }, 2000)
+            // setDisable(false);
+        }
+        else {
+            console.log(user);
+        }
+    }
 
     return (
         <>
             <ThemeProvider theme={theme} >
-                <Grid container component="main" justifyContent="center"  alignItems="center" style={{ minHeight: '100vh' }} >
+                <Grid container component="main" justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }} >
                     <CssBaseline />
                     <Grid item xs={12} sm={11} md={6} lg={5} component={Paper} elevation={6} square >
-                        <TabsUnstyled defaultValue={0} className="login-tabs" >
-                            <TabsList>
-                                <Tab>Sign in</Tab>
-                                <Tab>Sign up</Tab>
-                            </TabsList>
-                            <TabPanel value={0}>
-                                <Box sx={{ py: 8, px: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                    <Typography component="h1" variant="h5" className="fw-500 uppercase" >Sign in</Typography>
-                                    <Typography component="p" className="text-gray fs-14" >
-                                        Login To Get A Job
-                                    </Typography>
-                                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                                        <TextField margin="normal" fullWidth label="Email Address" name="email" autoComplete="off" autoFocus InputLabelProps={inputLabelStyle} />
-                                        <TextField margin="normal" fullWidth name="password" label="Password"type="password" InputLabelProps={inputLabelStyle} />
-                                        <Box className="text-center" >
-                                            <Button type="submit" variant="contained" className="login-btn" >Sign In</Button>
-                                        </Box>
-                                    </Box>
+                        <Div className="login-tabs" >
+                            <Div sx={{ display: "flex", flexWrap: "wrap" }}>
+                                <Typography onClick={() => { reset(); setLogin(true) }} component="p" variant="h5" className={"nav-item " + (login ? "active" : "")}>Sign in</Typography>
+                                <Typography onClick={() => { reset(); setLogin(false) }} component="p" variant="h5" className={"nav-item " + (!login ? "active" : "")}>Sign Up</Typography>
+                            </Div>
+                            <Box sx={{ pt: 6, px: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography component="h1" variant="h5" className="fw-500 uppercase">
+                                    {login ? "Sign in " : "Sign up"}
+                                </Typography>
+                                <Typography component="p" className="text-gray fs-14" >
+                                    {login ? "Login To Get A Job " : "Register To Get A Job"}
+                                </Typography>
+                                <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
+                                    {login ?
+                                        <>
+                                            <TextField margin="normal" fullWidth label="Email Address" name="email" autoComplete="off" autoFocus InputLabelProps={inputLabelStyle} {...register("email", { required: "This field is required" })} error={Boolean(errors.email)} helperText={errors.email?.message} />
+                                            <TextField margin="normal" fullWidth name="password" label="Password" type="password" InputLabelProps={inputLabelStyle} {...register("password", { required: "This field is required" })} error={Boolean(errors.password)} helperText={errors.password?.message} />
+                                        </>
+                                        :
+                                        <>
+                                            <TextField margin="normal" label="Full Name" type="name" name="name" autoComplete="off" autoFocus className="mr-20" InputLabelProps={inputLabelStyle} {...register("name", { required: "This field is required" })} error={Boolean(errors.name)} helperText={errors.name?.message}
+                                            />
+                                            <TextField margin="normal" label="Phone Number" type="number" name="number" autoComplete="off" InputLabelProps={inputLabelStyle} {...register("number", { required: "This field is required" })} error={Boolean(errors.number)} helperText={errors.number?.message}
+                                            />
+                                            <TextField margin="normal" label="Date Of Birth" type="date" name="birthDate" className="mr-20" InputLabelProps={inputDateLabelStyle} {...register("birth", { required: "This field is required" })} error={Boolean(errors.birth)} helperText={errors.birth?.message}
+                                            />
+                                            <FormControl sx={{ width: "50%", marginTop: "16px" }} >
+                                                <InputLabel htmlFor="gender">Gender</InputLabel>
+                                                <Select value={gender} label="Gender" name="gender" onChange={handleChange} >
+                                                    <MenuItem value="Male">Male</MenuItem>
+                                                    <MenuItem value="Female">Female</MenuItem>
+                                                    <MenuItem value="Others">Others</MenuItem>
+                                                </Select>
+                                            </FormControl>
+                                            <TextField margin="normal" fullWidth label="Email" type="email" name="email" autoComplete="off" InputLabelProps={inputLabelStyle} {...register("email", { required: "This field is required" })} error={Boolean(errors.email)} helperText={errors.email?.message}
+                                            />
+                                            <TextField margin="normal" name="password" label="Password" type="password" className="mr-20" InputLabelProps={inputLabelStyle} {...register("password", { required: "This field is required" })} error={Boolean(errors.password)} helperText={errors.password?.message}
+                                            />
+                                            <TextField margin="normal" name="confirm_pass" label="Confirm Password" type="password" InputLabelProps={inputLabelStyle} {...register("confirm_pass", { required: true, validate: (value) => value === password.current })} error={Boolean(errors.confirm_pass)} helperText={errors.confirm_pass?.type === "required" ? "This field is required" : errors.confirm_pass?.type === "validate" ? "Password does not match" : ""}
+                                            />
+                                        </>
+                                    }
+                                   {login && <Box className="text-center" >
+                                        <Button type="submit" variant="contained" className="login-btn" >Sign In</Button>
+                                    </Box>}
+                                   {!login && <Box className="text-center" >
+                                        <Button disabled={disable} type="submit" variant="contained" className="login-btn" >{disable ? "Registering..." : "Sign Up"}</Button>
+                                    </Box>}
                                 </Box>
-                            </TabPanel>
-                            <TabPanel value={1}>
-                                <Box className="signup-form">
-                                    <Typography component="h1" variant="h5" className="fw-500 uppercase">
-                                        Sign up
-                                    </Typography>
-                                    <Typography component="p" className="text-gray fs-14" >
-                                        Register To Get A Job
-                                    </Typography>
-                                    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                                        <TextField margin="normal" label="Full Name" type="name" name="name" autoComplete="off" autoFocus className="mr-20" InputLabelProps={inputLabelStyle} 
-                                        />
-                                        <TextField margin="normal" label="Phone Number" type="number" name="number" autoComplete="off" InputLabelProps={inputLabelStyle} 
-                                        />
-                                        <TextField margin="normal" label="Date Of Birth" type="date" name="birthDate" defaultValue={currentDate} className="mr-20" InputLabelProps={inputDateLabelStyle} 
-                                        />
-                                        <TextField margin="normal"  label="Gender" type="text" name="gender" autoComplete="off"  InputLabelProps={inputLabelStyle} 
-                                        />
-                                        <TextField margin="normal" fullWidth label="Email" type="email" name="email" autoComplete="off" InputLabelProps={inputLabelStyle} 
-                                        />
-                                        <TextField margin="normal" name="password" label="Password ddddd" type="password" className="mr-20" InputLabelProps={inputLabelStyle} 
-                                        />
-                                        <TextField margin="normal" name="confirm_pass" label="Confirm Password" type="password" InputLabelProps={inputLabelStyle} 
-                                        />
-                                        <Box className="text-center" >
-                                            <Button type="submit" variant="contained" className="login-btn" >Sign Up</Button>
-                                        </Box>
-                                    </Box>
-                                </Box>
-                            </TabPanel>
-                        </TabsUnstyled>
+                            </Box>
+                        </Div>
                     </Grid>
 
                     <Grid item xs={false} sm={11} md={6} lg={6} >
                         <Box
-                            sx={{my: 8, mx: 4, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                            sx={{ my: 8, mx: 4, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                             <img src={logoImg} className="logo" alt="logo" />
-                            <Typography component="p" className="text-gray fs-14" sx={{fontStyle: "italic", lineHeight: "0.6"}} >
+                            <Typography component="p" className="text-gray fs-14" sx={{ fontStyle: "italic", lineHeight: "0.6" }} >
                                 Shaping Tomorrow's Cybersecurity
                             </Typography>
-                            <Typography component="h1" variant="h4" sx={{color: "#19305a", marginTop: "3rem",  fontWeight: "500"}} >
+                            <Typography component="h1" variant="h4" sx={{ color: "#19305a", marginTop: "3rem", fontWeight: "500" }} >
                                 Welcome to TechForing
                             </Typography>
-                            <Typography component="h5" sx={{color: "#5bbc2e", fontWeight: "500"}} >
+                            <Typography component="h5" sx={{ color: "#5bbc2e", fontWeight: "500" }} >
                                 Notice:
                             </Typography>
-                            <Typography component="h5" sx={{color: "#19305a", fontWeight: "500"}} >
+                            <Typography component="h5" sx={{ color: "#19305a", fontWeight: "500" }} >
                                 An applicant can register only once.
                             </Typography>
                             <Typography component="p" className="text-gray fs-14" >
@@ -110,6 +157,9 @@ const Login = () => {
                     </Grid>
                 </Grid>
             </ThemeProvider>
+            {
+                <ToastContainer />
+            }
         </>
     );
 };

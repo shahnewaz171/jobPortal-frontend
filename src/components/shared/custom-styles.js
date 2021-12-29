@@ -145,8 +145,8 @@ export const modalStyle = {
 };
 
 export const inputLabelStyle = {
-  style: {fontSize: "14px"}
+  style: {fontSize: "14px", textTransform: "capitalize"}
 }
 export const inputDateLabelStyle ={
-  shrink: true, style: {fontSize: "14px"}
+  shrink: true, style: {fontSize: "14px", textTransform: "capitalize"}
 }
