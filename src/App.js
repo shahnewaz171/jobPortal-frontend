@@ -14,12 +14,9 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={
-              <PrivateRoute>
-                <Home />
-            </PrivateRoute>
-            } 
-          />
+          <Route path="/" element={<PrivateRoute />}>
+            <Route element={<Home />} />
+          </Route>
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/view-job" element={<ViewJob />} />
