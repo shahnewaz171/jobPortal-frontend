@@ -4,9 +4,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import EditJob from "./components/EditJob/EditJob";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
-// import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import ViewJob from "./components/ViewJob/ViewJob";
 import './App.css';
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 const App = () => {
 
@@ -14,7 +14,12 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={
+              <PrivateRoute>
+                <Home />
+            </PrivateRoute>
+            } 
+          />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/view-job" element={<ViewJob />} />

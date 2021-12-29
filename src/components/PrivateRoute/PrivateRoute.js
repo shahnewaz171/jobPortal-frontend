@@ -1,27 +1,10 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router';
+import { Navigate } from 'react-router-dom';
 
-const PrivateRoute = ({ children, ...rest }) => {
+const PrivateRoute = ({ children }) => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
 
-    return (
-        <Route
-            {...rest}
-            render={({ location }) =>
-                userInfo.email ? (
-                children
-                ) : (
-                <Redirect
-                    to={{
-                    pathname: "/",
-                    state: { from: location }
-                    }}
-                />
-                )
-            }
-        />
-    );
+    return userInfo.email ? children : <Navigate to="/login" />;
 };
-
 
 export default PrivateRoute;
