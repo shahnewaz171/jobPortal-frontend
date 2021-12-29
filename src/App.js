@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
@@ -13,18 +13,20 @@ import Navbar from "./components/shared/Navbar/Navbar";
 import ViewJob from "./components/ViewJob/ViewJob";
 
 function App() {
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <Router>
         <Switch>
           <Route exact path="/">
               <Navbar />
-              {/* <Cards />
-              <CreateJob />
+              <Cards />
+              <CreateJob open={open} setOpen={setOpen} />
               <SearchItems />
-              <Jobs /> */}
+              <Jobs />
               {/* <ViewJob /> */}
-              <EditJob />
+              {/* <EditJob /> */}
             </Route>
             <PrivateRoute path="/home">
               <h1>Home</h1>

@@ -6,3 +6,79 @@
 .createJob-btn button{
     padding: 5px 36px !important;
 }
+.createJob-item,
+.createJobSave{
+    display: flex;
+    justify-content: space-between;
+}
+.createJob-item{
+    margin-bottom: 1rem;
+}
+.createJob-item .searchItem-title{
+    width: 22%;
+    margin-right: 1rem;
+    white-space: nowrap;
+    text-transform: capitalize;
+    font-weight: 500 !important;
+    font-size: 16px;
+}
+.createJob-modal .css-1wnsr1i{
+    width: 50% ;
+    padding: 14px 32px;
+    overflow-y: auto;
+    height: 80vh;
+    border-color: #182F59;
+    border-right: none;
+}
+.createJob-modal h2{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 1.6rem;
+    font-weight: 700;
+}
+.createJob-modal .css-md26zr-MuiInputBase-root-MuiOutlinedInput-root{
+    border: 1px solid #707070;
+}
+.createJob-modal .createJob-item textarea{
+    outline: none;
+    border: 1px solid #707070;
+}
+.createJob-modal .createJobSave-btn{
+    padding: 4px 30px;
+}
+.createJob-modal .createJobSave-btn,
+.createJob-modal .createJobSave-btn:hover{
+    background-color: #182F59 !important;
+    text-transform: none;
+    font-weight: 400;
+}
+.createJobSave{
+    width: 100%;
+}
+.createJob-modal .close-btn{
+    position: absolute;
+    top: 8px;
+    right: 15px;
+}
+.createJob-modal .close-btn svg{
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.createJob-modal .css-1wnsr1i::-webkit-scrollbar{
+    width: 15px;
+}
+.createJob-modal .css-1wnsr1i::-webkit-scrollbar-track{
+    background: #182F59; 
+    z-index: 999;
+}
+.createJob-modal .css-1wnsr1i::-webkit-scrollbar-thumb{
+    background: #fff; 
+    border-radius: 15px;
+    border: 2px solid #182F59;
+}
+.createJob-modal .css-1wnsr1i::-webkit-scrollbar-thumb:hover{
+    background: #fff; 
+}
