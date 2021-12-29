@@ -6,23 +6,24 @@
     /* height: 80vh; */
     padding: 0px 10px;
 }
-.view-post .vJob-title,
+.view-post .vJob-info,
 .view-post .filter-questions{
     padding: 20px 0px;
 }
-.view-post .vJob-title{
+.view-post .vJob-info{
     border-bottom: 1px solid #707070;
 }
-.view-post .vJob-title span,
-.view-post .vJob-title p:first-child,
+.view-post .vJob-info span,
+.view-post .vJob-info p:first-child,
 .view-post .filter-questions p:first-child{
     text-transform: uppercase;
     font-weight: 600;
+    font-size: 16px;
 }
-.view-post .vJob-title span:last-child{
+.view-post .vJob-info span:last-child{
     font-weight: 800;
 }
-.view-post .vJob-title p:last-child{
+.view-post .vJob-info p:last-child{
     font-size: 14px;
     padding-top: 10px;
     font-weight: 500;
@@ -34,12 +35,42 @@
 }
 .view-post .filter-questions ul{
     list-style: decimal;
-    padding-left: 17px;
+    /* padding-left: 17px; */
 }
 .view-post .filter-questions ul li{
-    display: list-item;
+    /* display: list-item; */
     padding: 2px 0px;
 }
 .view-post .filter-questions ul li span{
     font-weight: 500;
+}
+
+/* Edit Job */
+.view-post .vJob-title,
+.view-post .vJob-info .editJob-search,
+.editJob-des{
+    display: flex;
+    justify-content: space-between;
+}
+.view-post .editJob-search .vEdit-btn{
+    width: 40%;
+    text-align: end;
+}
+.view-post .searchItem-title{
+    font-size: 16px;
+}
+.editJob-des{
+    padding-bottom: 1rem;
+}
+.vJob-info textarea{
+    outline: none;
+}
+.editJob .eJob-info{
+    border-bottom: none;
+}
+.filter-questions .css-zkqepn-MuiButtonBase-root-MuiCheckbox-root.Mui-checked{
+    color: #182F59;
+}
+.filter-questions .css-zkqepn-MuiButtonBase-root-MuiCheckbox-root{
+    color: #182F59;
 }

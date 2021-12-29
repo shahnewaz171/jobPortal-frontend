@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import EditJob from "./components/EditJob/EditJob";
 import Cards from "./components/Home/Cards/Cards";
 import CreateJob from "./components/Home/CreateJob/CreateJob";
 import Jobs from "./components/Home/Jobs/Jobs";
@@ -22,7 +23,8 @@ function App() {
               <CreateJob />
               <SearchItems />
               <Jobs /> */}
-              <ViewJob />
+              {/* <ViewJob /> */}
+              <EditJob />
             </Route>
             <PrivateRoute path="/home">
               <h1>Home</h1>

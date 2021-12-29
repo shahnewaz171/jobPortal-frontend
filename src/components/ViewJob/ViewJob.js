@@ -12,11 +12,11 @@ const ViewJob = () => {
             <Container className="view-post" maxWidth="lg">
                 <Card>
                     <CardContent>
-                        <Box className="vJob-title">
+                        <Box className="vJob-info">
                             <Typography variant="span">Job title</Typography>
                             <Typography variant="span" sx={{ paddingLeft: "30px" }}>Back-end developer</Typography>
                         </Box>
-                        <Box className="vJob-title">
+                        <Box className="vJob-info">
                             <Grid container rowSpacing={1} className="" columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                                 <Grid item xs={4} lg={2}>
                                     <Typography variant="p" component="p">Shift</Typography>
@@ -40,7 +40,7 @@ const ViewJob = () => {
                                 </Grid>
                             </Grid>
                         </Box>
-                        <Box className="vJob-title">
+                        <Box className="vJob-info">
                             <Typography variant="p" component="p">Description</Typography>
                             <Typography variant="p" component="p">
                                 As a backend developer, you will be expected to be actively involved in product development and establishing infrastructure. You will also have to coordinate with different teams across the organization. You are expected to be an early adopter of new technologies and find ways to integrate them into the tasks asked to perform. 

@@ -126,3 +126,7 @@ export const StyledTableRow = styled2(TableRow)(({ theme }) => ({
       textAlign: "start"
   }
 }));
+
+export const Div = styled2('div')(({ theme }) => ({
+  ...theme.typography.button
+}));
