@@ -45,7 +45,7 @@
     border: 1px solid #707070;
 }
 .createJob-modal .createJobSave-btn{
-    padding: 4px 30px;
+    padding: 4px 50px;
 }
 .createJob-modal .createJobSave-btn,
 .createJob-modal .createJobSave-btn:hover{
@@ -84,4 +84,8 @@
 .createJob-modal .css-1wc848c-MuiFormHelperText-root.Mui-error{
     text-transform: none;
     margin: 5px 0px 0px;
+}
+.disable-btn{
+    color: #aba2a2 !important;
+    font-weight: 500 !important;
 }

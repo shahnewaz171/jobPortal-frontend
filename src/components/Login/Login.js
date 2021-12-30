@@ -21,6 +21,7 @@ const Login = () => {
     });
     const location = useLocation();
     const navigate = useNavigate();
+    const toastId = useRef(null);
     const password = useRef();
     password.current = watch('password');
 
@@ -93,7 +94,12 @@ const Login = () => {
                     })
                     .catch(error => {
                         setDisable(false);
-                        console.error(error);
+                        toast.dismiss(toastId.current);
+                        toast.error(error?.message, {
+                            theme: "dark",
+                            position: toast.POSITION.TOP_LEFT,
+                            autoClose: 3000
+                        });
                     });
             }, 2000);
         }

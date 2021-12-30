@@ -1,43 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import axios from 'axios';
 import { FaPlusCircle } from "react-icons/fa";
 import { Typography, Button, Select, MenuItem, Box, Modal, TextField, TextareaAutosize, FormControl, FormHelperText } from '@mui/material';
 import { useForm, Controller } from "react-hook-form";
 import { GiCancel } from "react-icons/gi";
-import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import { Div, modalStyle } from '../../shared/custom-styles';
 import './CreateJob.css';
 
 const CreateJob = ({ open, setOpen }) => {
-    const [shift, seShift] = useState('');
-    const [department, setDepartment] = useState('');
-    const [level, setLevel] = useState('');
-    const [jobType, setJobType] = useState('');
     const [disable, setDisable] = useState(false);
-    const { register, handleSubmit, watch, reset, formState: { errors }, control } = useForm({
+    const toastId = useRef(null);
+    const { register, handleSubmit, reset, formState: { errors }, control } = useForm({
         mode: "all",
         reValidateMode: 'onChange'
     });
 
-    const handleShift = (e) => {
-        seShift(e.target.value);
-        console.log(shift);
-    };
-    const handleDepartment = (e) => {
-        setDepartment(e.target.value);
-        console.log(department);
-    };
-    const handleLevel = (e) => {
-        setLevel(e.target.value);
-        console.log(level);
-    };
-    const handleJobType = (e) => {
-        setJobType(e.target.value);
-        console.log(jobType);
-    };
-
     const onSubmit = (data) => {
-        console.log(data);
         const jwtToken = localStorage.getItem('jwtToken') || null;
 
         if(jwtToken !== null){
@@ -50,15 +29,27 @@ const CreateJob = ({ open, setOpen }) => {
             })
             .then(res => {
                 if (res) {
-                    console.log(res.statusText);
+                    setDisable(false);
+                    toast.success(res.statusText, {
+                        theme: "dark",
+                        position: toast.POSITION.TOP_LEFT,
+                        autoClose: 3000
+                    });
                     reset();
                 }
             })
             .catch(error => {
-                console.error(error);
+                setDisable(false);
+                toast.dismiss(toastId.current);
+                toast.error(error?.message, {
+                    theme: "dark",
+                    position: toast.POSITION.TOP_LEFT,
+                    autoClose: 3000
+                });
             });
-           }, 2000);
+           }, 1000);
         }
+        setDisable(true);
     };
 
     return (
@@ -181,11 +172,8 @@ const CreateJob = ({ open, setOpen }) => {
                         <Div className="createJob-item">
                             <Typography variant="p" component="div" className="searchItem-title" />
                             <Div className="createJobSave">
-                                <Button type="submit" variant="contained" className="createJobSave-btn" >
-                                    Save and add another
-                                </Button>
-                                <Button type="submit" variant="contained" className="createJobSave-btn" >
-                                    Save
+                                <Button disabled={disable} type="submit" variant="contained" className={"createJobSave-btn "+ ( disable ? "disable-btn" : "" )} >
+                                { disable ? "Saving...": "Save" }
                                 </Button>
                             </Div>
                         </Div>
