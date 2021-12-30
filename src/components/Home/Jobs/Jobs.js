@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { Box, Typography, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import { StyledTableCell } from '../../shared/custom-styles';
+import { ToastContainer } from 'react-toastify';
 import JobList from './JobList';
 import './Jobs.css';
 
@@ -19,7 +20,6 @@ const Jobs = () => {
         .then(res => {
            if(res){
                setJobs(res.data);
-               console.log(res.data)
            }
         })
       }, []);
@@ -35,7 +35,7 @@ const Jobs = () => {
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell align="left">Post Name</StyledTableCell>
-                                <StyledTableCell align="center" className="text-center">Vacancies</StyledTableCell>
+                                <StyledTableCell align="left">Vacancies</StyledTableCell>
                                 <StyledTableCell align="center">Shift</StyledTableCell>
                                 <StyledTableCell align="center" className="text-center" >Type</StyledTableCell>
                                 <StyledTableCell align="left">Post Date</StyledTableCell>
@@ -48,12 +48,15 @@ const Jobs = () => {
                         </TableHead>
                         <TableBody className="job-list">
                             {
-                                jobs?.map((job) => <JobList key={job.id} job={job} /> )
+                                jobs && jobs.map((job) => <JobList key={job.id} job={job} /> )
                             }
                         </TableBody>
                     </Table>
                 </TableContainer>
             </Box>
+            {
+                <ToastContainer />
+            }
         </>
     );
 };

@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import axios from 'axios';
 import { Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { StyledTableCell, StyledTableRow } from '../../shared/custom-styles';
 
 const JobList = ({ job }) => {
+    const toastId = useRef(null);
     const { jobTitle, vacancies, shift, jobType, postDate, lastUpdated, level, location, id } = job;
 
     const deleteJob = (id) => {
@@ -22,10 +23,16 @@ const JobList = ({ job }) => {
         .then(res => {
             if(res){
                 console.log(res);
+                toast.dismiss(toastId.current);
+                toast.success("Deleted", {
+                    theme: "dark",
+                    position: toast.POSITION.TOP_LEFT,
+                    autoClose: 3000
+                });
             }
         })
         .catch(error => {
-            console.log(error);
+            console.error(error);
         })
     }
 
@@ -36,7 +43,7 @@ const JobList = ({ job }) => {
                 <StyledTableCell component="th" scope="row">
                     {jobTitle}
                 </StyledTableCell>
-                <StyledTableCell align="center">{vacancies}</StyledTableCell>
+                <StyledTableCell align="left">{vacancies}</StyledTableCell>
                 <StyledTableCell align="left">{shift}</StyledTableCell>
                 <StyledTableCell align="center">{jobType}</StyledTableCell>
                 <StyledTableCell align="left">{postDate}</StyledTableCell>

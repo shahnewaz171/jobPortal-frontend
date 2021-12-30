@@ -27,10 +27,25 @@
 }
 .edit-icon{
     color: #5BBC2E;
+    transition: all 0.3s ease-in;
+}
+.edit-icon:hover{
+    color: #639c49;
 }
 .delete-icon{
     color: #DB0909;
+    transition: 0.3s ease-in;
+}
+.delete-icon:hover{
+    color: #bd3838;
 }
 .visible-icon{
     color: #066CCF;
+    transition: all 0.3s ease-in;
 }
+.visible-icon:hover{
+    color: #3970a7;
+}
+/* .job-items .css-1icfziv-MuiTableRow-root:last-child td{
+    text-align: center;
+} */
