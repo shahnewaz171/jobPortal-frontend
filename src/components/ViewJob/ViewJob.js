@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Grid, CssBaseline, Typography, Card, CardContent, List, ListItem, ListItemText, Box, Container } from '@mui/material';
+import { toast, ToastContainer } from 'react-toastify';
 import Navbar from '../shared/Navbar/Navbar';
 import './ViewJob.css';
 
@@ -9,7 +10,15 @@ const ViewJob = () => {
     const { id } = useParams();
     const [singleJob, setSingleJob] = useState([]);
 
-    /*there was no api for the single job post, so that's why I did write these code for single job.
+    useEffect(() => {
+        toast.warn('There was no api for the single job post. So, thats why I did write these code for single job', {
+            theme: "dark",
+            position: toast.POSITION.TOP_LEFT,
+            autoClose: 5000
+        });
+    }, [])
+
+    /* there was no api for the single job post, so that's why I did write these code for single job.
     useEffect(() => {
         const jwtToken = localStorage.getItem('jwtToken') || null;
         if(jwtToken !== null){
@@ -94,6 +103,9 @@ const ViewJob = () => {
                     </Card>
                 </Container>
             </div>
+            {
+                <ToastContainer />
+            }
         </>
     );
 };
