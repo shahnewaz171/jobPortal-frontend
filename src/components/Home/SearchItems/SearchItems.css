@@ -11,6 +11,7 @@
 .filterInput .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input,
 .filterInput .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input{
     padding: 5px 10px !important;
+    text-transform: none;
 }
 .filterInput .filter-btn{
     padding: 5px 68px !important;

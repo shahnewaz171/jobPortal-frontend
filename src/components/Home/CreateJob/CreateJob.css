@@ -66,7 +66,6 @@
     font-weight: 800;
     cursor: pointer;
 }
-
 .createJob-modal .css-1wnsr1i::-webkit-scrollbar{
     width: 15px;
 }
@@ -81,4 +80,8 @@
 }
 .createJob-modal .css-1wnsr1i::-webkit-scrollbar-thumb:hover{
     background: #fff; 
+}
+.createJob-modal .css-1wc848c-MuiFormHelperText-root.Mui-error{
+    text-transform: none;
+    margin: 5px 0px 0px;
 }
