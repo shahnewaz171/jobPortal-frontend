@@ -1,13 +1,35 @@
 import React from 'react';
+import axios from 'axios';
 import { Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { toast, ToastContainer } from 'react-toastify';
 import { StyledTableCell, StyledTableRow } from '../../shared/custom-styles';
 
 const JobList = ({ job }) => {
-    const { jobTitle, vacancies, shift, jobType, postDate, lastUpdated, level, location } = job;
+    const { jobTitle, vacancies, shift, jobType, postDate, lastUpdated, level, location, id } = job;
 
+    const deleteJob = (id) => {
+        const jwtToken = localStorage.getItem('jwtToken') || null;
+
+        axios.delete(`https://tf-practical.herokuapp.com/api/job_update/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwtToken}`
+            }
+        })
+        .then(res => {
+            if(res){
+                console.log(res);
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
+
+    
     return (
         <>
             <StyledTableRow >
@@ -28,7 +50,7 @@ const JobList = ({ job }) => {
                 </StyledTableCell>
                 <StyledTableCell align="center">
                     <EditIcon className="edit-icon" />
-                    <DeleteIcon className="delete-icon" sx={{ mx: 1 }} />
+                    <DeleteIcon onClick={() => deleteJob(id)} className="delete-icon" sx={{ mx: 1 }} />
                     <VisibilityIcon className="visible-icon" />
                 </StyledTableCell>
             </StyledTableRow>

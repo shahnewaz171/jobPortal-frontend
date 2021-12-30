@@ -19,6 +19,7 @@ const Jobs = () => {
         .then(res => {
            if(res){
                setJobs(res.data);
+               console.log(res.data)
            }
         })
       }, []);
