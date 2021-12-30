@@ -22,12 +22,6 @@
     font-size: 16px;
     font-weight: 700 !important;
 }
-.css-usvtid-MuiTableCell-root.MuiTableCell-head:nth-last-child(-n+2){
-    text-align: center;
-}
-.job-items table tbody td:nth-last-child(-n+2){
-    text-align: center;
-}
 .job-items table tbody td svg{
     cursor: pointer;
 }

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
+import axios from "axios";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -8,6 +9,22 @@ import './Jobs.css';
 
 
 const Jobs = () => {
+    const [jobs, setJobs] = useState([]);
+
+    useEffect(() => {
+        const jwtToken = localStorage.getItem('jwtToken') || null;
+        axios.get("https://tf-practical.herokuapp.com/api/job_post/", {
+            headers: {
+                'Authorization': `Bearer ${jwtToken}`
+            }
+        })
+        .then(res => {
+           if(res){
+               console.log(res.data);
+               setJobs(res.data);
+           }
+        })
+      }, [])
 
     return (
         <>
@@ -19,41 +36,45 @@ const Jobs = () => {
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell>Post Name</StyledTableCell>
-                                <StyledTableCell align="right">Total Applicant</StyledTableCell>
-                                <StyledTableCell align="right">Vacancies</StyledTableCell>
-                                <StyledTableCell align="right">Shift</StyledTableCell>
-                                <StyledTableCell align="right">Type</StyledTableCell>
-                                <StyledTableCell align="right">Post Date</StyledTableCell>
-                                <StyledTableCell align="right">Expire Date</StyledTableCell>
-                                <StyledTableCell align="right">Salary</StyledTableCell>
-                                <StyledTableCell align="right">Status</StyledTableCell>
-                                <StyledTableCell align="right">Action</StyledTableCell>
+                                <StyledTableCell align="left">Post Name</StyledTableCell>
+                                <StyledTableCell align="center" className="text-center">Total Applicant</StyledTableCell>
+                                <StyledTableCell align="center" className="text-center">Vacancies</StyledTableCell>
+                                <StyledTableCell align="center">Shift</StyledTableCell>
+                                <StyledTableCell align="center" className="text-center" >Type</StyledTableCell>
+                                <StyledTableCell align="left">Post Date</StyledTableCell>
+                                <StyledTableCell align="left">Expire Date</StyledTableCell>
+                                <StyledTableCell align="left">Salary</StyledTableCell>
+                                <StyledTableCell align="center" className="text-center">Status</StyledTableCell>
+                                <StyledTableCell align="center" className="text-center">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody>
-                            <StyledTableRow >
-                                <StyledTableCell component="th" scope="row">
-                                    Backend Developer
-                                </StyledTableCell>
-                                <StyledTableCell align="right">10</StyledTableCell>
-                                <StyledTableCell align="right">2</StyledTableCell>
-                                <StyledTableCell align="right">Day</StyledTableCell>
-                                <StyledTableCell align="right">Full Time</StyledTableCell>
-                                <StyledTableCell align="right">04.12.2021</StyledTableCell>
-                                <StyledTableCell align="right">04.12.2021</StyledTableCell>
-                                <StyledTableCell align="right">Negotiable</StyledTableCell>
-                                <StyledTableCell align="right">
-                                    <Typography variant="span" component="div" className="status-btn">
-                                        Active
-                                    </Typography>
-                                </StyledTableCell>
-                                <StyledTableCell align="right">
-                                    <EditIcon className="edit-icon" />
-                                    <DeleteIcon className="delete-icon" sx={{mx: 1}} />
-                                    <VisibilityIcon className="visible-icon" />
-                                </StyledTableCell>
-                            </StyledTableRow>
+                        <TableBody className="job-list">
+                            {jobs?.map((job) => {
+                                return (
+                                    <StyledTableRow key={job.id}>
+                                        <StyledTableCell component="th" scope="row">
+                                            Backend Developer
+                                        </StyledTableCell>
+                                        <StyledTableCell align="center">10</StyledTableCell>
+                                        <StyledTableCell align="center">2</StyledTableCell>
+                                        <StyledTableCell align="start">Day</StyledTableCell>
+                                        <StyledTableCell align="center">Full Time</StyledTableCell>
+                                        <StyledTableCell align="start">04.12.2021</StyledTableCell>
+                                        <StyledTableCell align="start">04.12.2021</StyledTableCell>
+                                        <StyledTableCell align="start">Negotiable</StyledTableCell>
+                                        <StyledTableCell align="center">
+                                            <Typography variant="span" component="div" className="status-btn">
+                                                Active
+                                            </Typography>
+                                        </StyledTableCell>
+                                        <StyledTableCell align="center">
+                                            <EditIcon className="edit-icon" />
+                                            <DeleteIcon className="delete-icon" sx={{ mx: 1 }} />
+                                            <VisibilityIcon className="visible-icon" />
+                                        </StyledTableCell>
+                                    </StyledTableRow>
+                                )
+                            })}
                         </TableBody>
                     </Table>
                 </TableContainer>
