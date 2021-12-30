@@ -9,6 +9,7 @@ import './Jobs.css';
 
 const Jobs = () => {
     const [jobs, setJobs] = useState([]);
+    const [jobId, setJobId] = useState('');
 
     useEffect(() => {
         const jwtToken = localStorage.getItem('jwtToken') || null;
@@ -20,13 +21,12 @@ const Jobs = () => {
                 }
             })
             .then(res => {
-            if(res){
-                console.log(res);
-                setJobs(res.data);
-            }
+                if(res){
+                    setJobs(res.data);
+                }
             });
         }
-      }, []);
+      }, [jobId]);
 
 
     return (
@@ -53,7 +53,7 @@ const Jobs = () => {
                         </TableHead>
                         <TableBody className="job-list">
                             {
-                                jobs && jobs.map((job) => <JobList key={job.id} job={job} /> )
+                                jobs && jobs.map((job) => <JobList key={job.id} job={job}  setJobId={ setJobId} /> )
                             }
                         </TableBody>
                     </Table>

@@ -1,20 +1,19 @@
 import React, { useRef } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { toast } from 'react-toastify';
 import { StyledTableCell, StyledTableRow } from '../../shared/custom-styles';
-import { Link } from 'react-router-dom';
 
-const JobList = ({ job }) => {
+const JobList = ({ job,  setJobId }) => {
     const toastId = useRef(null);
     const { jobTitle, vacancies, shift, jobType, postDate, lastUpdated, level, location, id } = job;
 
     const deleteJob = (id) => {
         const jwtToken = localStorage.getItem('jwtToken') || null;
-
         axios.delete(`https://tf-practical.herokuapp.com/api/job_update/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -23,18 +22,23 @@ const JobList = ({ job }) => {
         })
         .then(res => {
             if(res){
-                console.log(res);
                 toast.dismiss(toastId.current);
                 toast.success("Deleted", {
                     theme: "dark",
                     position: toast.POSITION.TOP_LEFT,
                     autoClose: 3000
                 });
+                setJobId(id);
             }
         })
         .catch(error => {
-            console.error(error);
-        })
+            toast.dismiss(toastId.current);
+            toast.error(error?.message, {
+                theme: "dark",
+                position: toast.POSITION.TOP_LEFT,
+                autoClose: 3000
+            });
+        });
     }
 
     
