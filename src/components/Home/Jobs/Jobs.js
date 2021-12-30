@@ -5,6 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { StyledTableCell, StyledTableRow } from '../../shared/custom-styles';
+import JobList from './JobList';
 import './Jobs.css';
 
 
@@ -37,44 +38,21 @@ const Jobs = () => {
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell align="left">Post Name</StyledTableCell>
-                                <StyledTableCell align="center" className="text-center">Total Applicant</StyledTableCell>
                                 <StyledTableCell align="center" className="text-center">Vacancies</StyledTableCell>
                                 <StyledTableCell align="center">Shift</StyledTableCell>
                                 <StyledTableCell align="center" className="text-center" >Type</StyledTableCell>
                                 <StyledTableCell align="left">Post Date</StyledTableCell>
-                                <StyledTableCell align="left">Expire Date</StyledTableCell>
-                                <StyledTableCell align="left">Salary</StyledTableCell>
+                                <StyledTableCell align="left">Last Updated</StyledTableCell>
+                                <StyledTableCell align="left">Level</StyledTableCell>
+                                <StyledTableCell align="left">Location</StyledTableCell>
                                 <StyledTableCell align="center" className="text-center">Status</StyledTableCell>
                                 <StyledTableCell align="center" className="text-center">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody className="job-list">
-                            {jobs?.map((job) => {
-                                return (
-                                    <StyledTableRow key={job.id}>
-                                        <StyledTableCell component="th" scope="row">
-                                            Backend Developer
-                                        </StyledTableCell>
-                                        <StyledTableCell align="center">10</StyledTableCell>
-                                        <StyledTableCell align="center">2</StyledTableCell>
-                                        <StyledTableCell align="start">Day</StyledTableCell>
-                                        <StyledTableCell align="center">Full Time</StyledTableCell>
-                                        <StyledTableCell align="start">04.12.2021</StyledTableCell>
-                                        <StyledTableCell align="start">04.12.2021</StyledTableCell>
-                                        <StyledTableCell align="start">Negotiable</StyledTableCell>
-                                        <StyledTableCell align="center">
-                                            <Typography variant="span" component="div" className="status-btn">
-                                                Active
-                                            </Typography>
-                                        </StyledTableCell>
-                                        <StyledTableCell align="center">
-                                            <EditIcon className="edit-icon" />
-                                            <DeleteIcon className="delete-icon" sx={{ mx: 1 }} />
-                                            <VisibilityIcon className="visible-icon" />
-                                        </StyledTableCell>
-                                    </StyledTableRow>
-                                )
-                            })}
+                            {
+                                jobs?.map((job) => <JobList key={job.id} job={job} /> )
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>
