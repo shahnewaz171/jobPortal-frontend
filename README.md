@@ -14,6 +14,9 @@ yarn start
 - Users need to be login at first. After that user can able to go to the home page.
 - After logging in, the users can create, remove and view jobs.
 - The user can sign up.
+
+## Note:
+There was no API for the single job post. So that's why I  commented on some codes of single jobs in the view job components.
   
 ## Netlify Deploy Steps
 At first, we need to add a 'build' file in our project with the below command.
