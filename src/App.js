@@ -18,10 +18,10 @@ const App = () => {
             element={ <PrivateRoute> <Home /> </PrivateRoute> } 
           />
           <Route path="login" element={ <Login /> } />
-          <Route path="view-job" 
+          <Route path="view-job/:id" 
             element={ <PrivateRoute> <ViewJob /> </PrivateRoute> } 
           />
-          <Route path="edit-job" 
+          <Route path="edit-job/:id" 
             element={ <PrivateRoute> <EditJob /> </PrivateRoute> } 
           />
         </Routes>

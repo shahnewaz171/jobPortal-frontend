@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { toast } from 'react-toastify';
 import { StyledTableCell, StyledTableRow } from '../../shared/custom-styles';
+import { Link } from 'react-router-dom';
 
 const JobList = ({ job }) => {
     const toastId = useRef(null);
@@ -56,9 +57,13 @@ const JobList = ({ job }) => {
                     </Typography>
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                    <EditIcon className="edit-icon" />
+                    <Link to={`edit-job/${id}`}>
+                        <EditIcon className="edit-icon" />
+                    </Link>
                     <DeleteIcon onClick={() => deleteJob(id)} className="delete-icon" sx={{ mx: 1 }} />
-                    <VisibilityIcon className="visible-icon" />
+                    <Link to={`view-job/${id}`}>
+                        <VisibilityIcon className="visible-icon" />
+                    </Link>
                 </StyledTableCell>
             </StyledTableRow>
         </>

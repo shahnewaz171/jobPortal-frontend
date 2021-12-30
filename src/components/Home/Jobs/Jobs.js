@@ -12,17 +12,22 @@ const Jobs = () => {
 
     useEffect(() => {
         const jwtToken = localStorage.getItem('jwtToken') || null;
-        axios.get("https://tf-practical.herokuapp.com/api/job_post/", {
-            headers: {
-                'Authorization': `Bearer ${jwtToken}`
+        if(jwtToken !== null){
+            axios.get("https://tf-practical.herokuapp.com/api/job_post/", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwtToken}`
+                }
+            })
+            .then(res => {
+            if(res){
+                console.log(res);
+                setJobs(res.data);
             }
-        })
-        .then(res => {
-           if(res){
-               setJobs(res.data);
-           }
-        })
+            });
+        }
       }, []);
+
 
     return (
         <>
