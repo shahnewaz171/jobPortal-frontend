@@ -24,6 +24,7 @@ const App = () => {
           <Route path="edit-job/:id" 
             element={ <PrivateRoute> <EditJob /> </PrivateRoute> } 
           />
+          <Route path='*' element={<PrivateRoute> <Home /> </PrivateRoute>} />
         </Routes>
       </BrowserRouter>
     </>
