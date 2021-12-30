@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import axios from "axios";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import { StyledTableCell, StyledTableRow } from '../../shared/custom-styles';
+import { Box, Typography, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
+import { StyledTableCell } from '../../shared/custom-styles';
 import JobList from './JobList';
 import './Jobs.css';
 
@@ -21,11 +18,10 @@ const Jobs = () => {
         })
         .then(res => {
            if(res){
-               console.log(res.data);
                setJobs(res.data);
            }
         })
-      }, [])
+      }, []);
 
     return (
         <>
