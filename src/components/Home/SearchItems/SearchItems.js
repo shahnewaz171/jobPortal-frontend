@@ -26,12 +26,12 @@ const SearchItems = () => {
     return (
         <>
             <Box sx={{ width: '100%' }}>
-                <Grid container rowSpacing={1} className="job-cards filterInput" columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ pt: 4, pb: 5, px: 3 }} >
+                <Grid container rowSpacing={1} className="job-cards filterInput" columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ pt: 2, pb: 5, px: 3 }} >
                     <Grid item xs={6} md={3} lg={2}>
                         <Typography variant="p" component="div" className="searchItem-title" >
                             search
                         </Typography>
-                       <TextField fullWidth sx={{border: "1px solid #707070"}} InputProps={{ endAdornment: (
+                       <TextField fullWidth InputProps={{ endAdornment: (
                        <InputAdornment position="end">
                             <FiSearch />
                         </InputAdornment>
@@ -42,7 +42,7 @@ const SearchItems = () => {
                         <Typography variant="p" component="div" className="searchItem-title" >
                             selected by type
                         </Typography>
-                        <Select fullWidth  sx={{border: "1px solid #707070"}} value={type} onChange={handleType} >
+                        <Select fullWidth value={type} onChange={handleType} >
                             <MenuItem value="type1">Type 1</MenuItem>
                             <MenuItem value="type2">Type 2</MenuItem>
                             <MenuItem value="type3">Type 3</MenuItem>
@@ -53,7 +53,7 @@ const SearchItems = () => {
                         <Typography variant="p" component="div" className="searchItem-title" >
                             selected by department
                         </Typography>
-                        <Select fullWidth  sx={{border: "1px solid #707070"}} value={department} onChange={handleDepartment} >
+                        <Select fullWidth value={department} onChange={handleDepartment} >
                             <MenuItem value="IT">IT</MenuItem>
                             <MenuItem value="Non IT">Non IT</MenuItem>
                             <MenuItem value="General">General</MenuItem>
@@ -64,7 +64,7 @@ const SearchItems = () => {
                         <Typography variant="p" component="div" className="searchItem-title" >
                             selected by time
                         </Typography>
-                        <Select fullWidth  sx={{border: "1px solid #707070"}} value={time} onChange={ handleTime} >
+                        <Select fullWidth value={time} onChange={ handleTime} >
                             <MenuItem value="10.00">10.00 AM</MenuItem>
                             <MenuItem value="12.00">12.00 PM</MenuItem>
                             <MenuItem value="2.00">2.00 PM</MenuItem>
@@ -74,14 +74,14 @@ const SearchItems = () => {
                         <Typography variant="p" component="div" className="searchItem-title" >
                             selected by shift
                         </Typography>
-                        <Select fullWidth  sx={{border: "1px solid #707070"}} value={shift} onChange={ handleShift} >
+                        <Select fullWidth value={shift} onChange={ handleShift} >
                             <MenuItem value="morning">Morning</MenuItem>
                             <MenuItem value="evening">Evening</MenuItem>
                             <MenuItem value="night">Night</MenuItem>
                         </Select>
                     </Grid>
                     <Grid item xs={6} md={3} lg={2}>
-                       <Typography variant="p" component="div" sx={{paddingTop: "26px", textAlign: "end"}} >
+                       <Typography variant="p" component="div" sx={{paddingTop: "28px", textAlign: "end"}} >
                             <Button variant="contained" className="filter-btn" >
                                 filter
                             </Button>

@@ -32,7 +32,6 @@ const Login = () => {
     let { from } = location.state || { from: { pathname: "/" }};
 
     const onSubmit = data => {
-        console.log(data);
         const formData = new FormData();
         
         formData.append('email', data.email);
@@ -54,8 +53,7 @@ const Login = () => {
                     .then(res => {
                         if (res) {
                             setDisable(false);
-                            console.log(res);
-                            toast.success("Success", {
+                            toast.success("Account Created", {
                                 theme: "dark",
                                 position: toast.POSITION.TOP_LEFT,
                                 autoClose: 3000
@@ -66,7 +64,12 @@ const Login = () => {
                     })
                     .catch(error => {
                         setDisable(false);
-                        console.error(error);
+                        toast.dismiss(toastId.current);
+                        toast.error(error?.message, {
+                            theme: "dark",
+                            position: toast.POSITION.TOP_LEFT,
+                            autoClose: 3000
+                        });
                     });
             }, 2000);
         }
@@ -80,7 +83,6 @@ const Login = () => {
                     .then(res => {
                         if (res) {
                             setDisable(false);
-                            console.log(res);
                             toast.success("Successfully Logged In", {
                                 theme: "dark",
                                 position: toast.POSITION.TOP_LEFT,
@@ -110,9 +112,9 @@ const Login = () => {
     return (
         <>
             <ThemeProvider theme={theme} >
-                <Grid container component="main" justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }} >
+                <Grid container component="main" justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }} className="nav-page" >
                     <CssBaseline />
-                    <Grid item xs={12} sm={11} md={6} lg={5} component={Paper} elevation={6} square >
+                    <Grid item xs={12} sm={11} md={6} lg={5} component={Paper} elevation={6}className="login-card" square >
                         <Div className="login-tabs" >
                             <Div sx={{ display: "flex", flexWrap: "wrap" }}>
                                 <Typography onClick={() => { reset(); setLogin(true); setGender("") }} component="p" variant="h5" className={"nav-item " + (login ? "active" : "")}>Sign in</Typography>
@@ -128,7 +130,7 @@ const Login = () => {
                                 <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
                                     {login ?
                                         <>
-                                            <TextField margin="normal" fullWidth label="Email Address" name="email" autoComplete="off" autoFocus InputLabelProps={inputLabelStyle} {...register("email", { required: "This field is required" })} error={Boolean(errors.email)} helperText={errors.email?.message} />
+                                            <TextField margin="normal" fullWidth label="Email Address" type="email" name="email" autoComplete="off" autoFocus InputLabelProps={inputLabelStyle} {...register("email", { required: "This field is required" })} error={Boolean(errors.email)} helperText={errors.email?.message} />
                                             <TextField margin="normal" fullWidth name="password" label="Password" type="password" InputLabelProps={inputLabelStyle} {...register("password", { required: "This field is required" })} error={Boolean(errors.password)} helperText={errors.password?.message} />
                                         </>
                                         :
@@ -155,10 +157,10 @@ const Login = () => {
                                         </>
                                     }
                                    {login && <Box className="text-center" >
-                                        <Button disabled={disable} type="submit" variant="contained" className="login-btn" >{ disable ? "Signing In...": "Sign In" }</Button>
+                                        <Button disabled={disable} type="submit" variant="contained" className={disable ? "disabled-btn" : "login-btn"} >{ disable ? "Signing In...": "Sign In" }</Button>
                                     </Box>}
                                    {!login && <Box className="text-center" >
-                                        <Button disabled={disable} type="submit" variant="contained" className="login-btn" >{ disable ? "Registering...": "Sign up" }</Button>
+                                        <Button disabled={disable} type="submit" variant="contained" className={disable ? "disabled-btn" : "login-btn"} >{ disable ? "Registering...": "Sign up" }</Button>
                                     </Box>}
                                 </Box>
                             </Box>
@@ -167,7 +169,7 @@ const Login = () => {
 
                     <Grid item xs={false} sm={11} md={6} lg={6} >
                         <Box
-                            sx={{ my: 8, mx: 4, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                            sx={{ my: 8, mx: 4, textAlign: "center"}}>
                             <img src={logoImg} className="logo" alt="logo" />
                             <Typography component="p" className="text-gray fs-14" sx={{ fontStyle: "italic", lineHeight: "0.6" }} >
                                 Shaping Tomorrow's Cybersecurity

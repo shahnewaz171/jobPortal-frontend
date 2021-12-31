@@ -1,3 +1,11 @@
+@media only screen and (max-width: 1199px){
+  .nav-page{
+    margin-top: 2rem;
+  }
+}
+.nav-page .login-card{
+  margin: 0px 15px;
+}
 .logo{
     width: 200px;
     height: 100px;
@@ -18,11 +26,14 @@ input[type=number]::-webkit-outer-spin-button {
 .css-1qn9dm1-MuiPaper-root-MuiGrid-root{
   border-radius: 6px;
 }
-.login-tabs .login-btn{
+.login-tabs .login-btn,
+.login-tabs .disabled-btn{
   margin-top: 24px;
   margin-bottom: 16px;
-  background-color: #19305a;
   font-weight: 400;
+}
+.login-tabs .login-btn{
+  background-color: #19305a;
 }
 .login-tabs .signup-form{
   padding: 16px 32px;
@@ -54,6 +65,10 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .login-tabs .MuiFormHelperText-root{
   text-transform: capitalize;
+}
+.disabled-btn{
+  color: #bdb9b9 !important;
+  background-color: #19305a !important;
 }
 @media only screen and (max-width: 599px) {
   .login-tab{

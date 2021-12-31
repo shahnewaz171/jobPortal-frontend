@@ -100,8 +100,8 @@ const CreateJob = ({ open, setOpen }) => {
                                 <Controller 
                                     render={({ field }) => (
                                         <Select {...field} sx={{ border: "1px solid #707070" }} >
-                                        <MenuItem value="day">Day</MenuItem>
-                                        <MenuItem value="night">Night</MenuItem>
+                                            <MenuItem value="day">Day</MenuItem>
+                                            <MenuItem value="night">Night</MenuItem>
                                         </Select>
                                     )}
                                     name="shift"

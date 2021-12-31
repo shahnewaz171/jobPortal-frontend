@@ -31,6 +31,23 @@
     background-color: #5BBC2E !important;
 }
 
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input,
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input,
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input,
+.MuiOutlinedInput-root,
+.MuiSelect-select,
+.MuiOutlinedInput-input {
+    padding: 5px 10px !important;
+    text-transform: none;
+}
+.css-v7esy.Mui-error{
+  text-transform: capitalize;
+  margin: 5px 0px 0px !important;
+}
+body,
+.bg-color{
+  background-color: #EFF3F6;
+}
 @media only screen and  (min-width: 600px){
   .css-1t29gy6-MuiToolbar-root,
   .job-cards {

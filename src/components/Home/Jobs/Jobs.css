@@ -19,8 +19,8 @@
     background-color: #123068 !important;
 }
 .job-items table thead th{
-    font-size: 16px;
-    font-weight: 700 !important;
+    font-size: 15px;
+    text-transform: uppercase;
 }
 .job-items table tbody td svg{
     cursor: pointer;

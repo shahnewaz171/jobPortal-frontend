@@ -73,22 +73,14 @@ const ViewJob = () => {
                             </Box>
                             <Box className="filter-questions">
                                 <Typography variant="p" component="p">Filter Question</Typography>
-                                <List>
-                                    <ListItem>
-                                        <ListItemText>
-                                            Lorem Ipsum is simply dummy text of the printing and  typesetting industry?
-                                        </ListItemText>
-                                    </ListItem>
-                                    <ListItem>
-                                        <ListItemText>
-                                            Lorem Ipsum is simply dummy text of the printing and  typesetting industry?
-                                        </ListItemText>
-                                    </ListItem>
-                                    <ListItem>
-                                        <ListItemText>
-                                            Lorem Ipsum is simply dummy text of the printing and  typesetting industry?
-                                        </ListItemText>
-                                    </ListItem>
+                                <List sx={{pb: 0}}>
+                                    {[0, 1, 2, 3].map((value) => {
+                                         return (
+                                            <ListItem key={value} >
+                                                <ListItemText primary={`${value + 1}.  Lorem Ipsum is simply dummy text of the printing and  typesetting industry?`} />
+                                            </ListItem>
+                                        )
+                                    })}
                                 </List>
                             </Box>
                         </CardContent>

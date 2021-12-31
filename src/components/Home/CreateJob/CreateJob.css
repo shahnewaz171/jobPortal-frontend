@@ -1,12 +1,35 @@
+@media only screen and (max-width: 767px){
+    .createJob-modal .css-1wnsr1i{
+        width: 78% ;
+    }    
+}
+@media only screen and (min-width: 768px){
+    .createJob-modal .css-1wnsr1i{
+        width: 50% ;
+    }    
+}
+@media only screen and (max-width: 991px){
+    .createJob-item .searchItem-title{
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 992px){
+    .createJob-item .searchItem-title{
+        width: 30%;
+    }
+    .createJob-item{
+        display: flex;
+        justify-content: space-between;
+    }
+}
 .createJob-btn{
     text-align: end !important;
     padding-right: 40px !important;
-    margin: 1.3rem 0px !important;
+    margin: 1.8rem 0px !important;
 }
 .createJob-btn button{
-    padding: 5px 36px !important;
+    padding: 8px 36px !important;
 }
-.createJob-item,
 .createJobSave{
     display: flex;
     justify-content: space-between;
@@ -15,15 +38,15 @@
     margin-bottom: 1rem;
 }
 .createJob-item .searchItem-title{
-    width: 22%;
-    margin-right: 1rem;
+    /* width: 22%; */
+    /* margin-right: 2rem; */
     white-space: nowrap;
     text-transform: capitalize;
     font-weight: 500 !important;
     font-size: 16px;
 }
 .createJob-modal .css-1wnsr1i{
-    width: 50% ;
+    /* width: 50% ; */
     padding: 14px 32px;
     overflow-y: auto;
     height: 80vh;
@@ -37,8 +60,8 @@
     padding-bottom: 1.6rem;
     font-weight: 700;
 }
-.createJob-modal .css-md26zr-MuiInputBase-root-MuiOutlinedInput-root{
-    border: 1px solid #707070;
+.createJob-modal .MuiOutlinedInput-root{
+    border: 1px solid #707070 !important;
 }
 .createJob-modal .createJob-item textarea{
     outline: none;

@@ -1,32 +1,19 @@
 import React, { useState } from 'react';
-import { Grid, CssBaseline, Typography, Card, CardContent, List, ListItem, ListItemText, Button, Select, MenuItem, TextareaAutosize, ListItemIcon, Checkbox, Box, Container } from '@mui/material';
+import axios from 'axios';
+import { Grid, CssBaseline, Typography, Card, CardContent, List, ListItem, ListItemText, Button, Select, MenuItem, TextareaAutosize, ListItemIcon, Checkbox, Box, Container, TextField } from '@mui/material';
+import { useForm, Controller } from "react-hook-form";
 import Navbar from '../shared/Navbar/Navbar';
 import { Div } from '../shared/custom-styles';
 import '../ViewJob/ViewJob.css';
+import { useParams } from 'react-router-dom';
 
 const EditJob = () => {
     const [checked, setChecked] = useState([0]);
-    const [shift, seShift] = useState('');
-    const [department, setDepartment] = useState('');
-    const [level, setLevel] = useState('');
-    const [vacancy, setVacancy] = useState('');
-    const [salary, setSalary] = useState('');
-
-    const handleShift = (e) => {
-        seShift(e.target.value);
-    };
-    const handleDepartment = (e) => {
-        setDepartment(e.target.value);
-    };
-    const handleLevel = (e) => {
-        setLevel(e.target.value);
-    };
-    const handleVacancy = (e) => {
-        setVacancy(e.target.value);
-    };
-    const handleSalary = (e) => {
-        setSalary(e.target.value);
-    };
+    const { id } = useParams();
+    const { register, handleSubmit, reset, formState: { errors }, control } = useForm({
+        mode: "all",
+        reValidateMode: 'onChange'
+    });
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -40,14 +27,33 @@ const EditJob = () => {
         setChecked(newChecked);
     };
 
+    const  onSubmit = (data) => {
+        console.log(data);
+        const jwtToken = localStorage.getItem('jwtToken') || null;
+        if(jwtToken !== null){
+            axios.patch(`https://tf-practical.herokuapp.com/api/job_update/${id}`, data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwtToken}`
+                }
+            })
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }
+    }
+
     return (
         <>
         <Navbar />
-            <div style={{ backgroundColor: "#EFF3F6" }}>
+            <div className="bg-color" >
                 <CssBaseline />
                 <Container className="editJob view-post filterInput" maxWidth="lg">
                     <Card>
-                        <CardContent>
+                        <CardContent component="form" onSubmit={handleSubmit(onSubmit)}>
                             <Box className="vJob-info vJob-title">
                                 <Div>
                                     <Typography variant="span">Job title</Typography>
@@ -62,11 +68,11 @@ const EditJob = () => {
                             <Box className="vJob-info">
                                 <Div className="editJob-search">
                                     <Grid container rowSpacing={1} className="" columnSpacing={{ xs: 1, sm: 2, md: 10 }}>
-                                        <Grid item xs={6} md={4}>
+                                        <Grid item xs={6} md={4} sx={{marginBottom: "18px"}}>
                                             <Typography variant="p" component="div" className="searchItem-title" >
                                                 Shift
                                             </Typography>
-                                            <Select fullWidth sx={{ border: "1px solid #707070" }} value={shift} onChange={handleShift} >
+                                            <Select fullWidth sx={{ border: "1px solid #707070" }} >
                                                 <MenuItem value="Morning">Morning</MenuItem>
                                                 <MenuItem value="Evening">Evening</MenuItem>
                                                 <MenuItem value="Night">Night</MenuItem>
@@ -74,19 +80,19 @@ const EditJob = () => {
                                         </Grid>
                                         <Grid item xs={6} md={4}>
                                             <Typography variant="p" component="div" className="searchItem-title" >
-                                                Department
+                                                Job Type
                                             </Typography>
-                                            <Select fullWidth sx={{ border: "1px solid #707070" }} value={department} onChange={handleDepartment} >
-                                                <MenuItem value="IT">IT</MenuItem>
-                                                <MenuItem value="Non IT">Non IT</MenuItem>
-                                                <MenuItem value="General">General</MenuItem>
+                                            <Select fullWidth sx={{ border: "1px solid #707070" }}>
+                                                <MenuItem value="part_time">Part Time</MenuItem>
+                                                <MenuItem value="full_time">Full Time</MenuItem>
+                                                <MenuItem value="internship">Internship</MenuItem>
                                             </Select>
                                         </Grid>
                                         <Grid item xs={6} md={4}>
                                             <Typography variant="p" component="div" className="searchItem-title" >
                                                 Level
                                             </Typography>
-                                            <Select fullWidth sx={{ border: "1px solid #707070" }} value={level} onChange={handleLevel} >
+                                            <Select fullWidth sx={{ border: "1px solid #707070" }} >
                                                 <MenuItem value="Junior">Junior</MenuItem>
                                                 <MenuItem value="Mid">Mid</MenuItem>
                                                 <MenuItem value="Senior">Senior</MenuItem>
@@ -96,7 +102,7 @@ const EditJob = () => {
                                             <Typography variant="p" component="div" className="searchItem-title" >
                                                 Vacancy
                                             </Typography>
-                                            <Select fullWidth sx={{ border: "1px solid #707070" }} value={vacancy} onChange={handleVacancy} >
+                                            <Select fullWidth sx={{ border: "1px solid #707070" }} >
                                                 <MenuItem value="3">3</MenuItem>
                                                 <MenuItem value="5">5</MenuItem>
                                                 <MenuItem value="8">8</MenuItem>
@@ -104,13 +110,9 @@ const EditJob = () => {
                                         </Grid>
                                         <Grid item xs={6} md={4}>
                                             <Typography variant="p" component="div" className="searchItem-title" >
-                                                Salary
+                                                LastDateOfApply
                                             </Typography>
-                                            <Select fullWidth sx={{ border: "1px solid #707070" }} value={salary} onChange={handleSalary} >
-                                                <MenuItem value="20k">20k</MenuItem>
-                                                <MenuItem value="30k">30k</MenuItem>
-                                                <MenuItem value="40k">40k</MenuItem>
-                                            </Select>
+                                            <TextField type="date" fullWidth sx={{ border: "1px solid #707070" }} name="lastDateOfApply" />
                                         </Grid>
                                     </Grid>
                                     <Div className="vEdit-btn">
