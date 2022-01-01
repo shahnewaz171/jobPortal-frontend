@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AppBar, Box, Toolbar, IconButton, Typography, Badge, MenuItem, Menu } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -78,11 +78,13 @@ const Navbar = () => {
                 <AppBar position="static" sx={{backgroundColor: "#182F59", padding: "5px 0px"}} >
                     <Toolbar >
                         <Box  component="div" sx={{marginRight: "15px"}}  >
-                           <img src={logo} alt="logo" className="main-logo" />
+                            <img src={logo} alt="logo" className="main-logo" />
                         </Box>
                         <Box  component="div" sx={{ display: { xs: 'none', sm: 'block' } }}  >
-                            <Typography variant="h6" sx={{fontSize: "22px", lineHeight: "1.1", fontWeight: "500"}} >TechForing</Typography> 
-                            <Typography variant="span" sx={{fontSize: "12px"}} >Shaping Tomorrow's Cybersecurity</Typography>
+                            <Link to="/" className="text-white text-decor-none" >
+                                <Typography variant="h6" sx={{fontSize: "22px", lineHeight: "1.1", fontWeight: "500"}} >TechForing</Typography> 
+                                <Typography variant="span" sx={{fontSize: "12px"}} >Shaping Tomorrow's Cybersecurity</Typography>
+                            </Link>
                         </Box>
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
